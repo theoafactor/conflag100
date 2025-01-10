@@ -3,6 +3,8 @@ on:
     push: 
         branches: 
             - master
+        tags: 
+          - "v*"
 jobs: 
     run-deployment: 
         runs-on: ubuntu-latest
@@ -22,6 +24,22 @@ jobs:
               run: |
                 docker push theoafactor/conflag_deploy_test:v1.0.0
 
+            - name: Extract Version from Tag
+              id: extract_version
+              run: echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+            - name: Clone Helm Repository
+              run: |
+                git clone https://github.com/theoafactor/conflaga_h.git conflaga_h
+                cd conflaga
+                git config user.name "Olu Adeyemo"
+                git config user.email "theoafactor@gmail.com"
+
+            - name: Update Helm Chart Version
+              run: |
+                  cd conflaga
+                  sed -i "s/^version: .*/version: ${{ env.version }}/" <path-to-Chart.yaml>
+                  sed -i "s/^appVersion: .*/appVersion: ${{ env.version }}/" <path-to-Chart.yaml>
 
 
 
