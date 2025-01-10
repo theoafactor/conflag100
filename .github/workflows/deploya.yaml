@@ -20,7 +20,7 @@ jobs:
                 
             - name: "Push the image to Docker Hub"
               run: |
-                docker push theoafactor/app_deploy_test:1
+                docker push theoafactor/conflag_deploy_test:v1.0.0
 
 
 
