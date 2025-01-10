@@ -7,7 +7,7 @@ jobs:
     run-deployment: 
         runs-on: ubuntu-latest
         steps: 
-            - name: "Checkouts out from the repository"
+            - name: "Checkouts out from the repository 1"
               uses: actions/checkout@v4
 
             - name: "Build the image"
