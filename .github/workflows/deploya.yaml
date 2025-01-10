@@ -1,0 +1,28 @@
+name: App Deployment
+on: 
+    push: 
+        branches: 
+            - master
+jobs: 
+    run-deployment: 
+        runs-on: ubuntu-latest
+        steps: 
+            - name: "Checkouts out from the repository"
+              uses: actions/checkout@v4
+
+            - name: "Build the image"
+              run: |
+                docker build -t theoafactor/app_deploy_test:1 .
+
+            - name: "Login into Docker HUb"
+              run: | 
+                docker login -u theoafactor -p ${{ secrets.DOCKERHUB_PASSWORD }} 
+                
+            - name: "Push the image to Docker Hub"
+              run: |
+                docker push theoafactor/app_deploy_test:1
+
+
+
+
+
