@@ -12,7 +12,7 @@ jobs:
 
             - name: "Build the image"
               run: |
-                docker build -t theoafactor/app_deploy_test:1 .
+                docker build -t theoafactor/conflag_deploy_test:v1.0.0 .
 
             - name: "Login into Docker HUb"
               run: | 
